@@ -10,14 +10,18 @@ export default function main(app: sst.App): void {
     runtime: "nodejs12.x"
   });
 
-  const containerStack = new ContainerStack(app, "container-stack");
-
   const authStack = new AuthStack(app, "auth-stack");
-  authStack.addDependency(containerStack);
 
   const dashboardStack = new DashboardStack(app, "dashboard-stack");
-  dashboardStack.addDependency(containerStack);
 
   const marketingStack = new MarketingStack(app, "marketing-stack");
-  marketingStack.addDependency(containerStack);
+
+  const containerStack = new ContainerStack(app, "container-stack", {
+    marketingUrl: marketingStack.websiteUrl,
+    authUrl: authStack.websiteUrl,
+    dashboardUrl: dashboardStack.websiteUrl
+  });
+  containerStack.addDependency(authStack);
+  containerStack.addDependency(dashboardStack);
+  containerStack.addDependency(marketingStack);
 }

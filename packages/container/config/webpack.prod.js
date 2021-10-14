@@ -3,7 +3,9 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 
-const domain = process.env.PRODUCTION_DOMAIN;
+const marketing = process.env.REACT_APP_MARKETING_URL;
+const auth = process.env.REACT_APP_AUTH_URL;
+const dashboard = process.env.REACT_APP_DASHBOARD_URL;
 
 const prodConfig = {
   mode: 'production',
@@ -15,9 +17,9 @@ const prodConfig = {
     new ModuleFederationPlugin({
       name: 'container',
       remotes: {
-        marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`,
-        auth: `auth@${domain}/auth/latest/remoteEntry.js`,
-        dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
+        marketing: `marketing@${marketing}/remoteEntry.js`,
+        auth: `auth@${auth}/remoteEntry.js`,
+        dashboard: `dashboard@${dashboard}/remoteEntry.js`,
       },
       shared: packageJson.dependencies,
     }),

@@ -1,7 +1,9 @@
 import * as sst from "@serverless-stack/resources";
-import { ReactStaticSite, StaticSite } from "@serverless-stack/resources";
+import { StaticSite } from "@serverless-stack/resources";
 
 export default class DashboardStack extends sst.Stack {
+  readonly websiteUrl: string;
+
   constructor(scope: sst.App, id: string, props?: sst.StackProps) {
     super(scope, id, props);
 
@@ -13,9 +15,11 @@ export default class DashboardStack extends sst.Stack {
       },
     });
 
+    this.websiteUrl = website.url;
+
     // Show the endpoint in the output
     this.addOutputs({
-      "DashboardUrl": website.url,
+      "DashboardUrl": this.websiteUrl,
     });
   }
 }
