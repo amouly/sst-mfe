@@ -2,6 +2,11 @@
   "name": "sst-mfe",
   "version": "0.1.0",
   "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "scripts": {
     "test": "sst test",
     "start": "sst start",
