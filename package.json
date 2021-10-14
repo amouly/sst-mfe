@@ -11,7 +11,7 @@
     "test": "sst test",
     "start": "sst start",
     "build": "sst build",
-    "deploy": "sst deploy",
+    "deploy": "AWS_PROFILE=securitizeDevelopment sst deploy",
     "remove": "sst remove"
   },
   "devDependencies": {
